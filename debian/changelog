@@ -1,4 +1,4 @@
-xorg-server (2:21.1.7-3) unstable; urgency=medium
+xorg-server (2:21.1.99-1) unstable; urgency=medium
 
   * Enable DRI2 for the udeb build, needed in addition to DRM support
     since 9c81b8f5b5 to build the modesetting driver. This fixes failures

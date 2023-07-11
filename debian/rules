@@ -26,14 +26,16 @@ override_dh_autoreconf-indep:
         -cf - * | xz > build-source/xorg-server.tar.xz
 
 override_dh_auto_configure:
-	dh_auto_configure --builddirectory=debian/build/main -- \
+	$(vars) dh_auto_configure --builddirectory=debian/build/main -- \
 		$(confflags) \
 		$(confflags_main) \
-		$(vars)
-	dh_auto_configure --builddirectory=debian/build/udeb -- \
+
+#		$(vars)
+	$(vars) dh_auto_configure --builddirectory=debian/build/udeb -- \
 		$(confflags) \
 		$(confflags_udeb) \
-		$(vars)
+
+#		$(vars)
 
 override_dh_auto_build:
 	dh_auto_build --builddirectory=debian/build/main
@@ -50,6 +52,9 @@ override_dh_auto_install:
 
 	# oh, yuck.
 	find debian/tmp/*/usr/lib/xorg -type f -name '*.la' -delete
+
+	# vvv
+	rm -rf debian/tmp/*/usr/share/doc
 
 	# remove modules not needed in d-i
 	rm -rf debian/tmp/udeb/usr/lib/xorg/modules/multimedia
